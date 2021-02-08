@@ -12,6 +12,11 @@ export default function App() {
             name: action.name
           }
         ];
+      case "remove":
+        const filteredState = state.filter(
+          (_, index) => index !== action.index
+        );
+        return filteredState;
       default:
         return state;
     }
@@ -31,7 +36,12 @@ export default function App() {
       </form>
       <ul>
         {items.map((item, index) => (
-          <li key={item.id}>{item.name}</li>
+          <li key={item.id}>
+            {item.name}
+            <button onClick={() => dispatch({ type: "remove", index })}>
+              X
+            </button>
+          </li>
         ))}
       </ul>
     </>
